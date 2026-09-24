@@ -1,5 +1,9 @@
 import express from "express";
 
+const PORT = 8000;
+const modelName = "gemma2:2b";
+const modelUrl = "http://localhost:11434"
+
 const app = express();
 app.use(express.json());
 
@@ -9,15 +13,14 @@ app.get("", (req, res) => {
 
 app.post("/ai/ask", async (req, res) => {
   const message = req.body.message;
-  console.log("Received message:", message);
 
-  const response = await fetch("http://localhost:11434/api/chat", {
+  const response = await fetch(`${modelUrl}/api/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "gemma2:2b",
+      model: modelName,
       messages: [
         {
           role: "user",
@@ -32,6 +35,6 @@ app.post("/ai/ask", async (req, res) => {
   return res.json({data});
 });
 
-app.listen(8000, () => {
-  console.log("Server is running on port 8000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
