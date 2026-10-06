@@ -67,7 +67,17 @@ O corpo da requisição deve conter a propriedade `message`:
 
 ```text
 src/
-└── server.ts   # Configuração do Express e rotas da API
+├── app.ts                         # Configura o Express e conecta middlewares e rotas
+├── config.ts                      # Configurações do servidor e do Ollama
+├── server.ts                      # Inicia o servidor HTTP
+├── controllers/
+│   └── ai.controller.ts           # Valida a requisição e prepara a resposta HTTP
+├── middleware/
+│   └── error-handler.ts           # Trata erros não processados pelas rotas
+├── routes/
+│   └── ai.routes.ts               # Declara as rotas relacionadas à IA
+└── services/
+    └── ollama.service.ts          # Comunica-se com a API do Ollama
 ```
 
 ## Scripts
